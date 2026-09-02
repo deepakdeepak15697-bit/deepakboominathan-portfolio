@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Professional portfolio of Deepak Boominathan">
+<title>Deepak Boominathan | 3D Portfolio</title>
+<style>
+:root{
+  --bg:#060914;--text:#f7f9ff;--muted:#b9c4d8;--accent:#63a7ff;
+  --card:rgba(18,25,45,.62);--border:rgba(160,190,255,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;line-height:1.65;
+}
+canvas#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-3}
+.background{
+  position:fixed;inset:0;z-index:-2;overflow:hidden;
+  background:radial-gradient(circle at 20% 20%,#142e64 0%,transparent 30%),
+             radial-gradient(circle at 80% 70%,#2a1558 0%,transparent 32%),
+             linear-gradient(135deg,#050812,#0a1020 55%,#080b17);
+}
+.orb{
+  position:absolute;border-radius:50%;filter:blur(55px);opacity:.55;
+  animation:drift 13s ease-in-out infinite alternate;
+}
+.orb.one{width:280px;height:280px;background:#2563eb;top:10%;left:6%}
+.orb.two{width:340px;height:340px;background:#7c3aed;right:3%;bottom:5%;animation-delay:-4s}
+.orb.three{width:210px;height:210px;background:#06b6d4;left:45%;top:50%;animation-delay:-7s}
+@keyframes drift{to{transform:translate(80px,-60px) scale(1.2)}}
+
+nav{
+  position:fixed;top:0;width:100%;z-index:100;padding:16px 7%;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(6,9,20,.62);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.06)
+}
+.logo{font-weight:800;letter-spacing:1.5px;color:var(--accent)}
+nav ul{display:flex;gap:22px;list-style:none}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;transition:.25s}
+nav a:hover{color:#fff}
+
+section{padding:110px 9%;position:relative}
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  perspective:1200px;
+}
+.hero-content{max-width:900px}
+.badge{
+  display:inline-block;padding:8px 15px;border:1px solid var(--border);
+  border-radius:999px;background:rgba(99,167,255,.08);color:#bcd8ff;margin-bottom:22px
+}
+.hero h1{font-size:clamp(44px,8vw,88px);line-height:1.05;margin-bottom:20px}
+.gradient{
+  background:linear-gradient(90deg,#fff,#72aaff,#c084fc);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{font-size:clamp(16px,2vw,21px);color:var(--muted);max-width:720px;margin:auto}
+.actions{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{
+  padding:13px 24px;border-radius:12px;text-decoration:none;font-weight:bold;
+  transition:.3s;display:inline-block
+}
+.primary{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;box-shadow:0 15px 35px rgba(37,99,235,.25)}
+.secondary{border:1px solid var(--border);color:white;background:rgba(255,255,255,.05)}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+
+.scene{
+  width:150px;height:150px;margin:45px auto 0;perspective:800px;
+}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 12s linear infinite}
+.face{
+  position:absolute;width:150px;height:150px;border:1px solid rgba(140,190,255,.45);
+  background:linear-gradient(135deg,rgba(65,120,255,.28),rgba(160,80,255,.10));
+  backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;
+  font-weight:bold;color:#dceaff;box-shadow:inset 0 0 35px rgba(80,130,255,.15)
+}
+.front{transform:translateZ(75px)}.back{transform:rotateY(180deg) translateZ(75px)}
+.right{transform:rotateY(90deg) translateZ(75px)}.left{transform:rotateY(-90deg) translateZ(75px)}
+.top{transform:rotateX(90deg) translateZ(75px)}.bottom{transform:rotateX(-90deg) translateZ(75px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+
+.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
+.intro{color:var(--muted);max-width:760px;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;perspective:1000px}
+.card{
+  padding:27px;border-radius:22px;background:var(--card);border:1px solid var(--border);
+  backdrop-filter:blur(18px);box-shadow:0 25px 55px rgba(0,0,0,.22);
+  transform-style:preserve-3d;transition:transform .15s ease,box-shadow .3s ease
+}
+.card:hover{box-shadow:0 30px 65px rgba(45,95,220,.20)}
+.card h3{color:#9bc5ff;margin-bottom:10px;transform:translateZ(20px)}
+.card p{color:var(--muted);transform:translateZ(12px)}
+.tags{display:flex;flex-wrap:wrap;gap:12px}
+.tags span{padding:10px 15px;border-radius:999px;background:rgba(80,130,255,.13);border:1px solid var(--border);color:#d9e7ff}
+.contact{text-align:center}
+.email{display:inline-block;margin-top:20px;color:#9bc5ff;font-size:18px;text-decoration:none}
+footer{text-align:center;padding:35px;color:#8491a8;border-top:1px solid rgba(255,255,255,.06)}
+
+@media(max-width:700px){
+ nav ul{display:none} section{padding:95px 7%}
+ .scene{transform:scale(.8);margin-top:20px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="background">
+  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+</div>
+
+<nav>
+  <div class="logo">DEEPAK.</div>
+  <ul>
+    <li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li><li><a href="#business">Business</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge">PERSONAL PROFESSIONAL PORTFOLIO</div>
+    <h1>Deepak <span class="gradient">Boominathan</span></h1>
+    <p>Web Developer · Finance & Accounting Researcher · Entrepreneur · Aspiring Lawyer</p>
+    <div class="actions">
+      <a class="btn primary" href="#about">Explore Portfolio</a>
+      <a class="btn secondary" href="#contact">Contact Me</a>
+    </div>
+
+    <div class="scene">
+      <div class="cube">
+        <div class="face front">DEEPAK</div><div class="face back">PORTFOLIO</div>
+        <div class="face right">WEB</div><div class="face left">LAW</div>
+        <div class="face top">FINANCE</div><div class="face bottom">BUSINESS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2 class="title">About Me</h2>
+  <p class="intro">A Grade 12 student exploring technology, finance, business, and law through practical projects and independent learning.</p>
+  <div class="grid">
+    <article class="card"><h3>My Approach</h3><p>I enjoy learning new skills, researching ideas, communicating confidently, and building practical projects.</p></article>
+    <article class="card"><h3>My Vision</h3><p>To develop knowledge across technology, finance, business, and law and create meaningful professional opportunities.</p></article>
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="title">Web Development</h2>
+  <div class="grid">
+    <article class="card"><h3>Travel Agency Website</h3><p>Developed a website concept focused on tourism information, travel services, and a professional user experience.</p></article>
+    <article class="card"><h3>Personal Web Projects</h3><p>Building personal projects to strengthen skills in website design and development.</p></article>
+    <article class="card"><h3>Hosting & Deployment</h3><p>Exploring website hosting, deployment, and modern web technologies.</p></article>
+  </div>
+</section>
+
+<section id="research">
+  <h2 class="title">Accounting & Finance Research</h2>
+  <div class="grid">
+    <article class="card"><h3>Research Focus</h3><p>Balance sheets, financial statements, assets, liabilities, and debit and credit concepts.</p></article>
+    <article class="card"><h3>Financial Connections</h3><p>Exploring how different accounting elements are interconnected and how financial balance is maintained.</p></article>
+  </div>
+</section>
+
+<section id="business">
+  <h2 class="title">Business & Entrepreneurship</h2>
+  <div class="grid">
+    <article class="card"><h3>ELITEEDGE.PRODUCT</h3><p>A business concept exploring connections between wholesalers and consumers through efficient B2C commerce.</p></article>
+    <article class="card"><h3>Business Focus</h3><p>Supplier relationships, consumer connections, competitive pricing, and learning practical business operations.</p></article>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="title">Skills & Interests</h2>
+  <div class="tags">
+    <span>Web Development</span><span>Website Design</span><span>Website Hosting</span>
+    <span>Entrepreneurship</span><span>Business Development</span><span>Accounting</span>
+    <span>Finance Research</span><span>Public Speaking</span><span>Communication</span>
+    <span>Analytical Thinking</span>
+  </div>
+</section>
+
+<section>
+  <h2 class="title">Future Goals</h2>
+  <div class="card"><h3>Law, Finance & Beyond</h3><p>My primary goal is to pursue a career in law. I also plan to continue developing my knowledge of accounting, finance, business, and technology.</p></div>
+</section>
+
+<section id="contact" class="contact">
+  <h2 class="title">Let's Connect</h2>
+  <p class="intro" style="margin:0 auto">Open to professional discussions, projects, and future opportunities.</p>
+  <a class="email" href="mailto:deepakboominathan06@gmail.com">deepakboominathan06@gmail.com</a>
+</section>
+
+<footer>© 2026 Deepak Boominathan · Professional Portfolio<br>ELITEEDGE.PRODUCT</footer>
+
+<script>
+const canvas=document.getElementById("stars"),ctx=canvas.getContext("2d");
+let w,h,stars=[];
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;stars=Array.from({length:Math.min(130,Math.floor(w*h/9000))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,v:Math.random()*.35+.08}))}
+function draw(){
+ ctx.clearRect(0,0,w,h);
+ stars.forEach(s=>{s.y+=s.v;if(s.y>h){s.y=0;s.x=Math.random()*w}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(180,210,255,.75)";ctx.fill()});
+ requestAnimationFrame(draw)
+}
+addEventListener("resize",resize);resize();draw();
+
+document.querySelectorAll(".card").forEach(card=>{
+ card.addEventListener("mousemove",e=>{
+  const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`rotateX(${-y*8}deg) rotateY(${x*10}deg) translateY(-4px)`;
+ });
+ card.addEventListener("mouseleave",()=>card.style.transform="rotateX(0) rotateY(0)");
+});
+</script>
+</body>
+</html>
